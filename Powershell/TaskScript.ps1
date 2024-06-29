@@ -1,3 +1,19 @@
+
+################################################################################################################
+# Description
+# This script is used to perform file operations like Move, Copy, and Delete in PowerShell.
+
+
+# Version History
+# 1.0 - 2024-06-25 - Initial script - Aditya Pal
+# 1.1 - 2024-06-26 - Added comments and updated the script - Aditya Pal
+
+
+
+################################################################################################################
+
+# Defining the parameters for the script
+# Setting non-mandatory fields to false in case of delete action
 param (
     [Parameter(Mandatory=$true)]
     [ValidateSet("Move", "Copy", "Delete")]
@@ -13,6 +29,9 @@ param (
     [string[]]$Files
 )
 
+# Defining the functions for the script
+
+# Function to move files from source to destination
 function Move-Files {
     param (
         [string]$Source,
@@ -32,6 +51,7 @@ function Move-Files {
     }
 }
 
+# Function to copy files from source to destination
 function Copy-Files {
     param (
         [string]$Source,
@@ -51,6 +71,10 @@ function Copy-Files {
     }
 }
 
+# Function to delete files from source
+# we may need to modify the logic if the script is supposed to be triggered in some IDE
+# No issues if we are running the script in as a command/powershell script
+
 function Delete-Files {
     param (
         [string]$Source,
@@ -67,6 +91,14 @@ function Delete-Files {
         }
     }
 }
+
+# Main script logic
+#Switch case to perform the action based on the input   
+# If User is storing modules in a different location, we need to save above modules in that location and import the modules here
+# Example:
+#   Import-Module MyModule
+#   Import-Module -Name MyModule
+#   Import-Module -Path C:\Path\To\MyModule.psm1
 
 switch ($Action) {
     "Move" {
